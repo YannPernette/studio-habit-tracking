@@ -4,7 +4,19 @@ export const postType = defineType({
   name: 'post',
   title: 'Post',
   type: 'document',
+  groups: [
+    {
+      title: 'seo',
+      name: 'seo',
+    }
+  ],
   fields: [
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'seo',
+      group: 'seo',
+    }),
     defineField({
       name: 'title',
       type: 'string',
@@ -16,6 +28,18 @@ export const postType = defineType({
       options: {source: 'title'},
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: 'categories',
+      title: 'Categories',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'category' }] }],
+    }),
+    // defineField({
+    //   name: 'category',
+    //   title: 'Categorie',
+    //   type: 'reference',
+    //   to: { type: 'category' },
+    // }),
     defineField({
       name: 'publishedAt',
       type: 'datetime',
