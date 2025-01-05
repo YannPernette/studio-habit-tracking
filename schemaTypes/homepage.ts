@@ -9,31 +9,56 @@ export const homepage = defineType({
   },
   fields: [
     defineField({
-      name: 'title',
-      type: 'string',
-    }),
-    defineField({
       name: 'hero',
       type: 'object',
       fields: [
         {type: 'string', name: 'title'},
-        {type: 'string', name: 'text'},
+        {type: 'text', name: 'introduction'},
         {
-          name: 'stats',
+          type: 'object',
+          name: 'button',
+          fields: [
+            {type: 'string', name: 'title'},
+            {type: 'string', name: 'link'},
+          ],
+        },
+        {type: 'image', name: 'image'},
+      ],
+    }),
+    defineField({
+      name: 'functionalities',
+      type: 'object',
+      fields: [
+        {type: 'string', name: 'title'},
+        {type: 'text', name: 'text'},
+        {
+          name: 'elements',
           type: 'array',
-          title: 'stats for hero',
+          title: 'Eléments des fonctionnalités',
           of: [
             defineArrayMember({
               type: 'object',
-              name: 'stat',
+              name: 'element',
               fields: [
-                {type: 'string', name: 'value'},
-                {type: 'string', name: 'text'},
+                {type: 'image', name: 'image'},
+                {type: 'string', name: 'title'},
+                {type: 'string', name: 'subtitle'},
+                {type: 'text', name: 'text'},
               ],
             }),
           ],
         },
       ],
+    }),
+    defineField({
+      name: 'quote',
+      type: 'text',
+    }),
+    defineField({
+      name: 'testimonies',
+      title: 'Testimonies',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'testimony'}]}],
     }),
   ],
 })
